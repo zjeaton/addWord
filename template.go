@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"strings"
 )
 
 type PageVariables struct {
@@ -13,6 +15,7 @@ type PageVariables struct {
 }
 
 func main() {
+	convert("cotters")
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/calculate", Calculate)
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -51,4 +54,70 @@ func Calculate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Print("template executing error: ", err)
 	}
+}
+
+func convert(s string) int {
+	s = strings.ToLower(s)
+	var i, j int
+	for _, c := range s {
+		switch string(c) {
+		case "a":
+			j = 1
+		case "b":
+			j = 2
+		case "c":
+			j = 3
+		case "d":
+			j = 4
+		case "e":
+			j = 5
+		case "f":
+			j = 6
+		case "g":
+			j = 7
+		case "h":
+			j = 8
+		case "i":
+			j = 9
+		case "j":
+			j = 10
+		case "k":
+			j = 11
+		case "l":
+			j = 12
+		case "m":
+			j = 13
+		case "n":
+			j = 14
+		case "o":
+			j = 15
+		case "p":
+			j = 16
+		case "q":
+			j = 17
+		case "r":
+			j = 18
+		case "s":
+			j = 19
+		case "t":
+			j = 20
+		case "u":
+			j = 21
+		case "v":
+			j = 22
+		case "w":
+			j = 23
+		case "x":
+			j = 24
+		case "y":
+			j = 25
+		case "z":
+			j = 26
+		default:
+			j = 0
+		}
+		i = i + j
+	}
+	fmt.Println("cotters = ", i)
+	return i
 }
