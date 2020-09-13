@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -16,7 +17,15 @@ type PageVariables struct {
 func main() {
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/calculate", Calculate)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(getPort(), nil))
+}
+
+func getPort() string {
+	p := os.Getenv("PORT")
+	if p != "" {
+		return ":" + p
+	}
+	return ":8080"
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
