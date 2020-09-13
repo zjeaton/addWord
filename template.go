@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -15,7 +14,6 @@ type PageVariables struct {
 }
 
 func main() {
-	convert("cotters")
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/calculate", Calculate)
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -39,10 +37,13 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func Calculate(w http.ResponseWriter, r *http.Request) {
+	word := getWord(w, r)
+	sum := convert(word)
+
 	CalculateVars := PageVariables{
 		Title: "Word Calculation Complete",
-		Word:  "cotters",
-		Sum:   100,
+		Word:  word,
+		Sum:   sum,
 	}
 
 	t, err := template.ParseFiles("calculate.html")
@@ -54,6 +55,15 @@ func Calculate(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Print("template executing error: ", err)
 	}
+}
+
+func getWord(w http.ResponseWriter, r *http.Request) string {
+	var word string
+	r.ParseForm()
+	for _, v := range r.Form {
+		word = strings.Join(v, "")
+	}
+	return word
 }
 
 func convert(s string) int {
@@ -118,6 +128,5 @@ func convert(s string) int {
 		}
 		i = i + j
 	}
-	fmt.Println("cotters = ", i)
 	return i
 }
