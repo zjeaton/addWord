@@ -8,8 +8,7 @@
   </head>
 
   <body>
-    <h1>{{ .Title }}</h1>
-    <h2>The value of {{ .Word }} is {{ .Sum }}!</h2>
+    <h1>The value of {{ .Word }} is {{ .Sum }}{{ .Bang }}</h1>
       <form action="/calculate">
         <p>Would you like to calculate another? </p>
         <p><input type="text" name="word"/></p>

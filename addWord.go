@@ -12,6 +12,7 @@ type PageVariables struct {
 	Title string
 	Word  string
 	Sum   int
+	Bang  string
 }
 
 func main() {
@@ -51,11 +52,13 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func Calculate(w http.ResponseWriter, r *http.Request) {
 	word := getWord(w, r)
 	sum := convert(word)
+	bang := bangYesNo(sum)
 
 	CalculateVars := PageVariables{
 		Title: "Word Calculation Complete",
 		Word:  word,
 		Sum:   sum,
+		Bang:  bang,
 	}
 
 	t, err := template.ParseFiles("calculate.html")
@@ -141,4 +144,12 @@ func convert(s string) int {
 		i = i + j
 	}
 	return i
+}
+
+func bangYesNo(i int) string {
+	if i%50 == 0 {
+		return "!"
+	} else {
+		return ""
+	}
 }
