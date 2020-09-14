@@ -1,11 +1,22 @@
+  
 :root {
-  font-size: calc(0.7em + 0.5vw);
-  --main-bg: #fff;
-  --main-color: #000;
+  box-sizing: border-box;
+  font-size: calc(1vw + .6em);
+}
+
+@media (min-width: 50em) {
+  :root {
+    font-size: 1.125em;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 
 body {
-  box-sizing: border-box;
   border-top: 3px solid #444444;
   background-color: #EBEBEE;
   padding: 20px 20px;
@@ -16,4 +27,11 @@ body {
 
 body * + * {
   margin-top: .5em;
+}
+
+@media (min-width: 35em) {
+  .title > h1 {
+    font-size: 2.25rem;
+    margin: .2em 0;
+  }
 }
