@@ -17,6 +17,7 @@ type PageVariables struct {
 func main() {
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/calculate", Calculate)
+	
 	log.Fatal(http.ListenAndServe(getPort(), nil))
 }
 
@@ -29,6 +30,7 @@ func getPort() string {
 }
 
 func Index(w http.ResponseWriter, r *http.Request) {
+
 	IndexVars := PageVariables{
 		Title: "Let's Add Up Word Values!",
 	}
