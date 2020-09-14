@@ -150,6 +150,6 @@ func bangYesNo(i int) string {
 	if i%50 == 0 {
 		return "!"
 	} else {
-		return ""
+		return "."
 	}
 }
