@@ -17,7 +17,8 @@ type PageVariables struct {
 func main() {
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/calculate", Calculate)
-	
+	fs := http.FileServer(http.Dir("./assets"))
+	http.Handle("/assets/", http.StripPrefix("/assets/", fs))
 	log.Fatal(http.ListenAndServe(getPort(), nil))
 }
 
